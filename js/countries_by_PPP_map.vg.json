@@ -78,7 +78,8 @@
                                 "feature": "countries"
                             }
                         },
-                        "key": "id"
+                        "key": "id",
+                        "fields": ["geometry"]
                     },
                     "as": "geo"
                 },
