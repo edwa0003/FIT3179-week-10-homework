@@ -1,6 +1,6 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "title": "COVID-19 Active Cases (10 Oct 2020)",
+    "title": "COVID-19 PPP2023 Cases (10 Oct 2020)",
     "width": 800,
     "height": 400,
     "projection": {"type": "equalEarth"},
@@ -16,17 +16,17 @@
             "url": "https://raw.githubusercontent.com/edwa0003/FIT3179-week-10-homework/refs/heads/main/data/PPP_by_countries_2023.csv"
           },
           "key": "Country",
-          "fields": ["Active"]
+          "fields": ["PPP2023"]
         }
       },
-      {"calculate": "datum.Active + 0.1", "as": "Active Cases"}
+      {"calculate": "datum.PPP2023 + 0.1", "as": "PPP2023 Cases"}
     ],
     "selection": {
       "caseFilter": {
         "type": "single",
-        "fields": ["Active Cases"],
+        "fields": ["PPP2023 Cases"],
         "bind": {
-          "Active Cases": {
+          "PPP2023 Cases": {
             "input": "range",
             "min": 0,
             "max": 1000000,
@@ -38,17 +38,17 @@
     "mark": {"type": "geoshape"},
     "encoding": {
       "color": {
-        "field": "Active Cases",
+        "field": "PPP2023 Cases",
         "type": "quantitative",
         "scale": {"type": "log"}
       },
       "tooltip": [
         {"field": "properties.NAME", "type": "nominal", "title": "Country"},
-        {"field": "Active", "type": "quantitative"}
+        {"field": "PPP2023", "type": "quantitative"}
       ],
       "opacity": {
         "condition": {
-          "test": "datum['Active'] > (caseFilter['Active Cases'] - 0.1)",  
+          "test": "datum['PPP2023'] > (caseFilter['PPP2023 Cases'] - 0.1)",  
           "value": 1
         },
         "value": 0.1
