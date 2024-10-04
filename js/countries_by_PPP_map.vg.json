@@ -69,7 +69,7 @@
             },
             "transform": [
                 {
-                    "lookup": "ID",
+                    "lookup": "Country",
                     "from": {
                         "data": {
                             "url": "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json",
@@ -78,8 +78,7 @@
                                 "feature": "countries"
                             }
                         },
-                        "key": "id",
-                        "fields": ["geometry"]
+                        "key": "properties.name"
                     },
                     "as": "geo"
                 },
