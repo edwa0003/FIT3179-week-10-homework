@@ -72,7 +72,7 @@
     },
     {
       "data": {
-        "url": "/path/to/cleaned_ppp_data_2013_2023.csv"
+        "url": "https://raw.githubusercontent.com/edwa0003/FIT3179-week-10-homework/refs/heads/main/data/Long_format_PPP_data_from_2013_to_2023_for_all_countries.csv"
       },
       "transform": [
         {
