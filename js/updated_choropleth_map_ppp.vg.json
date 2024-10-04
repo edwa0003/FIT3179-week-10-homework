@@ -18,7 +18,7 @@
             "lookup": "properties.NAME",
             "from": {
                 "data": {
-                    "url": "/mnt/data/PPP_by_countries_2023.csv"
+                    "url": "https://raw.githubusercontent.com/edwa0003/FIT3179-week-10-homework/refs/heads/main/data/PPP_by_countries_2023.csv"
                 },
                 "key": "country",
                 "fields": [
