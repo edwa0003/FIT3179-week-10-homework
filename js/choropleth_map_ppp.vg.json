@@ -13,7 +13,7 @@
         "lookup": "properties.NAME",
         "from": {
           "data": {
-            "url": "https://raw.githubusercontent.com/FIT3179/Vega-Lite/main/3_choropleth_map/data/covid_10_10_2020.csv"
+            "url": "https://raw.githubusercontent.com/edwa0003/FIT3179-week-10-homework/refs/heads/main/data/Merged_COVID-PPP_Data.csv"
           },
           "key": "Country",
           "fields": ["Active"]
