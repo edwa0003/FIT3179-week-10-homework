@@ -92,8 +92,8 @@
                     "type": "quantitative",
                     "scale": {
                         "type": "log",
-                        "domain": [1, 100000],
-                        "range": ["#f7fbff", "#9ecae1", "#3182bd", "#08519c"] // More dramatic transition colors
+                        "domain": [4, 40000],
+                        "range": ["#1f77b4", "#FFFF00"]
                     },
                     "condition": {
                         "test": "datum.PPP === 0",
