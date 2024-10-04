@@ -1,6 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "title": "COVID-19 2023 PPP Amount (10 Oct 2020)",
+  "title": "COVID-19 2023_PPP Cases (10 Oct 2020)",
   "width": 800,
   "height": 400,
   "projection": {"type": "equalEarth"},
@@ -13,20 +13,20 @@
       "lookup": "properties.NAME",
       "from": {
         "data": {
-          "url": "https://github.com/edwa0003/FIT3179-week-10-homework/blob/main/data/ppp_2023.csv"
+          "url": "https://raw.githubusercontent.com/edwa0003/FIT3179-week-10-homework/main/data/ppp_2023.csv"
         },
-        "key": "Country",
+        "key": "country",
         "fields": ["2023_PPP"]
       }
     },
-    {"calculate": "datum.2023_PPP + 0.1", "as": "2023 PPP Amount"}
+    {"calculate": "datum.2023_PPP + 0.1", "as": "PPP_Cases_2023"}
   ],
   "selection": {
     "caseFilter": {
       "type": "single",
-      "fields": ["2023 PPP Amount"],
+      "fields": ["PPP_Cases_2023"],
       "bind": {
-        "2023 PPP Amount": {
+        "PPP_Cases_2023": {
           "input": "range",
           "min": 0,
           "max": 1000000,
@@ -38,7 +38,7 @@
   "mark": {"type": "geoshape"},
   "encoding": {
     "color": {
-      "field": "2023 PPP Amount",
+      "field": "PPP_Cases_2023",
       "type": "quantitative",
       "scale": {"type": "log"}
     },
@@ -48,7 +48,7 @@
     ],
     "opacity": {
       "condition": {
-        "test": "datum['2023_PPP'] > (caseFilter['2023 PPP Amount'] - 0.1)",  
+        "test": "datum['PPP_Cases_2023'] > (caseFilter['PPP_Cases_2023'] - 0.1)",  
         "value": 1
       },
       "value": 0.1
