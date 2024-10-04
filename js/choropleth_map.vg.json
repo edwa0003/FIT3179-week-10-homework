@@ -1,0 +1,66 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": "COVID-19 Active Cases (10 Oct 2020)",
+  "width": 800,
+  "height": 400,
+  "projection": {
+    "type": "equalEarth"
+  },
+  "data": {
+    "url": "ppp_2023.csv"
+  },
+  "transform": [
+    {
+      "lookup": "properties.NAME",
+      "from": {
+        "data": {
+          "url": "ppp_2023.csv"
+        },
+        "key": "country",
+        "fields": [
+          "2023"
+        ]
+      }
+    }
+  ],
+  "selection": {
+    "countrySelect": {
+      "type": "single",
+      "on": "click",
+      "fields": [
+        "properties.NAME"
+      ],
+      "bind": "legend"
+    }
+  },
+  "mark": {
+    "type": "geoshape"
+  },
+  "encoding": {
+    "color": {
+      "field": "2023",
+      "type": "quantitative",
+      "scale": {
+        "type": "log"
+      }
+    },
+    "tooltip": [
+      {
+        "field": "properties.NAME",
+        "type": "nominal",
+        "title": "Country"
+      },
+      {
+        "field": "Active",
+        "type": "quantitative"
+      }
+    ],
+    "opacity": {
+      "condition": {
+        "test": "datum['Active'] > (caseFilter['Active Cases'] - 0.1)",
+        "value": 1
+      },
+      "value": 0.1
+    }
+  }
+}

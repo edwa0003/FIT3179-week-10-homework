@@ -1,18 +1,17 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "data": {
-    "url": "ppp_long.csv"
+    "url": "ppp_2023.csv"
   },
   "transform": [
-    {
-      "filter": "datum.country == countrySelect['properties.NAME']"
-    }
+    {"filter": "datum.country == countrySelect['properties.NAME']"}
   ],
   "mark": "line",
   "encoding": {
     "x": {
       "field": "year",
-      "type": "ordinal"
+      "type": "ordinal",
+      "scale": {"domain": ["2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023"]}
     },
     "y": {
       "field": "PPP",
