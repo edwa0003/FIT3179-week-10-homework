@@ -1,7 +1,7 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "data": {
-    "url": "ppp_2023.csv"
+    "url": "https://github.com/edwa0003/FIT3179-week-10-homework/blob/main/data/countries_and_PPP.csv"
   },
   "transform": [
     {"filter": "datum.country == countrySelect['properties.NAME']"}
