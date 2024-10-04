@@ -1,0 +1,26 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {
+    "url": "ppp_long.csv"
+  },
+  "transform": [
+    {
+      "filter": "datum.country == countrySelect['properties.NAME']"
+    }
+  ],
+  "mark": "line",
+  "encoding": {
+    "x": {
+      "field": "year",
+      "type": "ordinal"
+    },
+    "y": {
+      "field": "PPP",
+      "type": "quantitative"
+    },
+    "color": {
+      "field": "country",
+      "type": "nominal"
+    }
+  }
+}
