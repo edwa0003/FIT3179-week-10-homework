@@ -91,7 +91,13 @@
                     "field": "PPP",
                     "type": "quantitative",
                     "scale": {
-                        "scheme": "blues"
+                        "type": "log",
+                        "domain": [1, 100000],
+                        "range": ["lightblue", "darkblue"]
+                    },
+                    "condition": {
+                        "test": "datum.PPP === 0",
+                        "value": "gray"
                     },
                     "legend": { "format": ".2s" }
                 },
