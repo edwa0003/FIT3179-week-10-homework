@@ -1,67 +1,107 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "title": "Purchasing Power Parity (PPP) by Country (2013-2023)",
-    "width": 800,
-    "height": 400,
-    "projection": {"type": "equalEarth"},
+    "title": "World Countries PPP by Year",
+    "width": "container",
+    "height": 500,
     "params": [
-      {
-        "name": "Year_selection",
-        "value": 2023,
-        "bind": {
-          "input": "range",
-          "min": 2013,
-          "max": 2023,
-          "step": 1,
-          "name": "Year: "
+        {
+            "name": "Year_selection",
+            "value": 2023,
+            "bind": {
+                "input": "range",
+                "min": 2013,
+                "max": 2023,
+                "step": 1,
+                "name": "Year:  "
+            }
+        },
+        {
+            "name": "zoom_level",
+            "value": 300,
+            "bind": {
+                "input": "range",
+                "min": 100,
+                "max": 1000,
+                "step": 50,
+                "name": "Zoom: "
+            }
+        },
+        {
+            "name": "center_to",
+            "value": [0, 20],
+            "bind": {
+                "input": "select",
+                "options": [
+                    [0, 20], 
+                    [-95, 37], 
+                    [10, 51], 
+                    [100, 15]
+                ],
+                "labels": ["Global", "North America", "Europe", "South East Asia"],
+                "name": "Map Centre: "
+            }
         }
-      },
-      {
-        "name": "zoom_level",
-        "value": 200,
-        "bind": {
-          "input": "range",
-          "min": 50,
-          "max": 500,
-          "step": 10,
-          "name": "Zoom: "
-        }
-      },
-      {
-        "name": "center_to",
-        "value": [0, 0],
-        "bind": {
-          "input": "select",
-          "options": [
-            [0, 0],
-            [-100, 40],
-            [100, 30],
-            [0, -30]
-          ],
-          "labels": ["World", "USA", "Asia", "Africa"],
-          "name": "Focus: "
-        }
-      }
     ],
-    "data": {
-      "url": "https://raw.githubusercontent.com/FIT3179/Vega-Lite/main/3_choropleth_map/js/ne_110m_admin_0_countries.topojson",
-      "format": {"type": "topojson", "feature": "ne_110m_admin_0_countries"}
+    "projection": {
+        "type": "equirectangular",
+        "center": { "expr": "center_to" },
+        "scale": { "expr": "zoom_level" }
     },
-    "transform": [
-      {
-        "lookup": "properties.ISO_A3",
-        "from": {
-          "data": {
-            "url": "https://raw.githubusercontent.com/edwa0003/FIT3179-week-10-homework/refs/heads/main/data/PPP_from_2013_to_2023.csv"
-          },
-          "key": "ISO_A3",
-          "fields": ["Year", "PPP"]
+    "layer": [
+        {
+            "data": {
+                "url": "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json",
+                "format": { "type": "topojson", "feature": "countries" }
+            },
+            "mark": {
+                "type": "geoshape",
+                "fill": "#ddd",
+                "stroke": "white",
+                "strokeWidth": 1
+            },
+            "encoding": {
+                "tooltip": { "field": "properties.name", "type": "nominal", "title": "Country" }
+            }
+        },
+        {
+            "data": {
+                "url": "https://raw.githubusercontent.com/edwa0003/FIT3179-week-10-homework/refs/heads/main/data/PPP_from_2013_to_2023_billion.csv"
+            },
+            "transform": [
+                {
+                    "lookup": "ISO_A3",
+                    "from": {
+                        "data": {
+                            "url": "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json",
+                            "format": {
+                                "type": "topojson",
+                                "feature": "countries"
+                            }
+                        },
+                        "key": "id"
+                    },
+                    "as": "geo"
+                },
+                { "filter": "datum.Year == Year_selection" }
+            ],
+            "mark": { "type": "geoshape", "stroke": "#fff", "strokeWidth": 0.5 },
+            "encoding": {
+                "shape": { "field": "geo", "type": "geojson" },
+                "color": {
+                    "field": "PPP",
+                    "type": "quantitative",
+                    "scale": {
+                        "scheme": "blues"
+                    },
+                    "legend": { "format": ".2s" }
+                },
+                "tooltip": [
+                    { "field": "Country", "type": "nominal", "title": "Country" },
+                    { "field": "PPP", "type": "quantitative", "title": "Purchasing Power Parity", "format": "," },
+                    { "field": "Year", "type": "quantitative", "title": "Year" }
+                ]
+            }
         }
-      },
-      {"filter": "datum.Year == Year_selection"},
-      {"filter": "isValid(datum.PPP)"},  // Filter out rows with invalid PPP values
-      {"calculate": "datum.PPP + 0", "as": "PPP"}  // Ensure valid PPP values
     ],
-    "mark": {"type": "geoshape", "stroke": "white", "fill": "lightgray"},
-   
-  
+    "config": {}
+}
