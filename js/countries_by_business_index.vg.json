@@ -5,10 +5,12 @@
   },
   "transform": [
     {
+      "sort": [{"field": "2019", "order": "ascending"}]
+    },
+    {
       "window": [
         {"op": "row_number", "as": "rank"}
-      ],
-      "sort": [{"field": "2019", "order": "ascending"}]
+      ]
     },
     {
       "filter": "datum.rank > sliderValue && datum.rank <= sliderValue + 10"
@@ -21,7 +23,7 @@
       "bind": {
         "input": "range",
         "min": 0,
-        "max": 180,
+        "max": 170,
         "step": 10,
         "name": "Countries: "
       }
@@ -32,7 +34,7 @@
     "y": {
       "field": "Country",
       "type": "nominal",
-      "sort": {"field": "2019", "order": "ascending"}
+      "sort": {"field": "rank", "order": "ascending"}
     },
     "x": {
       "field": "2019",
