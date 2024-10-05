@@ -1,0 +1,33 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "description": "Horizontal bar chart of the top 10 countries with the lowest Ease of Doing Business Index in 2019.",
+    "data": {
+      "url": "https://raw.githubusercontent.com/edwa0003/FIT3179-week-10-homework/refs/heads/main/data/ease_of_doing_business_index_2019.csv"
+    },
+    "transform": [
+      {
+        "sort": [{"field": "2019", "order": "ascending"}]
+      },
+      {
+        "window": [{"op": "rank", "as": "rank"}]
+      },
+      {
+        "filter": "datum.rank <= 100"
+      }
+    ],
+    "mark": "bar",
+    "encoding": {
+      "y": {
+        "field": "Country Name",
+        "type": "nominal",
+        "sort": "-x",
+        "title": "Country"
+      },
+      "x": {
+        "field": "2019",
+        "type": "quantitative",
+        "title": "Ease of Doing Business Index (2019)"
+      }
+    }
+  }
+  
