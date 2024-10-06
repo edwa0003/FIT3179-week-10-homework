@@ -18,51 +18,63 @@
     <!-- CSS file -->
     <link rel="stylesheet" type="text/css" href="css/style.css" media="all">
 
-
 </head>
 
 <body>
 
     <div class="page">
 
+        <hr class="hr3">
 
-            <hr class="hr3">
-
-            <h2>Countries by ease of doing business index</h2>
-            <!-- pure grid group -->
-            <div class="pure-g">
-                <div class="pure-u-1-1">
-                    <div id="vis2" class="vis-container"></div>
-                </div>
+        <h2>Countries by ease of doing business index</h2>
+        <!-- pure grid group -->
+        <div class="pure-g">
+            <div class="pure-u-1-1">
+                <div id="vis2" class="vis-container"></div>
+                <p>A nation's ranking on the index was based on an average of 10 subindices:</p>
+                <ul>
+                    <li><strong>Starting a business:</strong> Procedures, time, cost, and minimum capital to open a new business</li>
+                    <li><strong>Dealing with construction permits:</strong> Procedures, time, and cost to build a warehouse</li>
+                    <li><strong>Getting electricity:</strong> Procedures, time, and cost required for a business to obtain a permanent electricity connection for a newly constructed warehouse</li>
+                    <li><strong>Registering property:</strong> Procedures, time, and cost to register commercial real estate</li>
+                    <li><strong>Getting credit:</strong> Strength of legal rights index, depth of credit information index</li>
+                    <li><strong>Protecting investors:</strong> Indices on the extent of disclosure, the extent of director liability, and ease of shareholder suits</li>
+                    <li><strong>Paying taxes:</strong> Number of taxes paid, hours per year spent preparing tax returns, and total tax payable as a share of gross profit</li>
+                    <li><strong>Trading across borders:</strong> Number of documents, cost, and time necessary to export and import</li>
+                    <li><strong>Enforcing contracts:</strong> Procedures, time, and cost to enforce a debt contract</li>
+                    <li><strong>Resolving insolvency:</strong> The time, cost, and recovery rate (%) under a bankruptcy proceeding</li>
+                </ul>
+                
             </div>
-            <!-- end pure grid group -->
-            <br>
+        </div>
+        <!-- end pure grid group -->
+        <br>
 
-            <hr class="hr3">
+        <hr class="hr3">
 
-
-            <h2>Countries by year and PPP</h2>
-            <!-- pure grid group -->
-            <div class="pure-g">
-                <div class="pure-u-1-1">
-                    <div id="vis3" class="vis-container"></div>
-                </div>
+        <h2>Countries by year and PPP</h2>
+        <!-- pure grid group -->
+        <div class="pure-g">
+            <div class="pure-u-1-1">
+                <div id="vis3" class="vis-container"></div>
+                <p> Purchasing Power Parity (PPP) enables entrepreneurs to make informed decisions about operating expenses 
+                    and market potential.</p>
             </div>
-            <!-- end pure grid group -->
-            <br>
+        </div>
+        <!-- end pure grid group -->
+        <br>
 
-            <hr class="hr3">
+        <hr class="hr3">
 
-            <hr class="hr3">
+        <hr class="hr3">
 
-            <div class="pure-g">
-                <div class="pure-u-1-1 small-font">
-                    <p>&copy; 2022 <a href="https://fit3179.github.io/Vega-Lite/" target="_blank">FIT3179 Teaching Team</a>. Copyright reserved. Those examples are for educational purpose only.
-                </div>
+        <div class="pure-g">
+            <div class="pure-u-1-1 small-font">
+                <p>&copy; 2022 <a href="https://fit3179.github.io/Vega-Lite/" target="_blank">FIT3179 Teaching Team</a>. Copyright reserved. Those examples are for educational purpose only.
             </div>
+        </div>
 
     </div>
-
 
     <script type="text/javascript">
         // Function to adjust the visualization width dynamically
@@ -71,11 +83,11 @@
                 result.view.width(defaultWidth).run();
             });
         }
-    
+
         setVisualizationWidth("js/countries_by_business_index.vg.json", '#vis2', 1000);      // Apply to vis2
         setVisualizationWidth("js/countries_by_PPP_map.vg.json", '#vis3', 1000);      // Apply to vis3
         //setVisualizationWidth("4_small_multiples.vg.json", '#vis4', 1000);  // Apply to vis4
-    </script>    
+    </script>
 </body>
 
 </html>
