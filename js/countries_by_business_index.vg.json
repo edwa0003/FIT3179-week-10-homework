@@ -34,7 +34,7 @@
     "y": {
       "field": "Country",
       "type": "nominal",
-      "sort": {"field": "rank", "order": "ascending"}
+      "sort": {"field": "2019", "order": "ascending"}
     },
     "x": {
       "field": "2019",
