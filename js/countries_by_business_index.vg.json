@@ -13,7 +13,7 @@
       ]
     },
     {
-      "filter": "datum.rank > sliderValue && datum.rank <= sliderValue + 10"
+      "filter": "datum.rank > sliderValue && datum.rank <= sliderValue + 20"
     }
   ],
   "params": [
