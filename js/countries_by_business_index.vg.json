@@ -22,7 +22,7 @@
       "value": 1,
       "bind": {
         "input": "range",
-        "min": 1,
+        "min": 0,
         "max": 170,
         "step": 10,
         "name": "Countries: "
