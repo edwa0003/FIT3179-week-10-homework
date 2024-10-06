@@ -4,110 +4,155 @@
     "width": "container",
     "height": 500,
     "params": [
-        {
-            "name": "Year_selection",
-            "value": 2023,
-            "bind": {
-                "input": "range",
-                "min": 2013,
-                "max": 2023,
-                "step": 1,
-                "name": "Year:  "
-            }
-        },
-        {
-            "name": "zoom_level",
-            "value": 300,
-            "bind": {
-                "input": "range",
-                "min": 100,
-                "max": 1000,
-                "step": 50,
-                "name": "Zoom: "
-            }
-        },
-        {
-            "name": "center_to",
-            "value": [0, 20],
-            "bind": {
-                "input": "select",
-                "options": [
-                    [0, 20], 
-                    [-95, 37], 
-                    [10, 51], 
-                    [100, 15]
-                ],
-                "labels": ["Global", "North America", "Europe", "South East Asia"],
-                "name": "Map Centre: "
-            }
+      {
+        "name": "Year_selection",
+        "value": 2023,
+        "bind": {
+          "input": "range",
+          "min": 2013,
+          "max": 2023,
+          "step": 1,
+          "name": "Year:  "
         }
+      },
+      {
+        "name": "zoom_level",
+        "value": 300,
+        "bind": {
+          "input": "range",
+          "min": 100,
+          "max": 1000,
+          "step": 50,
+          "name": "Zoom: "
+        }
+      },
+      {
+        "name": "center_to",
+        "value": [0, 20],
+        "bind": {
+          "input": "select",
+          "options": [
+            [0, 20], 
+            [-95, 37], 
+            [10, 51], 
+            [100, 15]
+          ],
+          "labels": ["Global", "North America", "Europe", "South East Asia"],
+          "name": "Map Centre: "
+        }
+      }
     ],
     "projection": {
-        "type": "equirectangular",
-        "center": { "expr": "center_to" },
-        "scale": { "expr": "zoom_level" }
+      "type": "equirectangular",
+      "center": { "expr": "center_to" },
+      "scale": { "expr": "zoom_level" }
     },
     "layer": [
-        {
-            "data": {
-                "url": "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json",
-                "format": { "type": "topojson", "feature": "countries" }
-            },
-            "mark": {
-                "type": "geoshape",
-                "fill": "#ddd",
-                "stroke": "white",
-                "strokeWidth": 1
-            },
-            "encoding": {
-                "tooltip": { "field": "properties.name", "type": "nominal", "title": "Country" }
-            }
+      {
+        "data": {
+          "url": "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json",
+          "format": { "type": "topojson", "feature": "countries" }
         },
-        {
-            "data": {
-                "url": "https://raw.githubusercontent.com/edwa0003/FIT3179-week-10-homework/refs/heads/main/data/PPP_from_2013_to_2023_billion.csv"
-            },
-            "transform": [
-                {
-                    "lookup": "id",
-                    "from": {
-                        "data": {
-                            "url": "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json",
-                            "format": {
-                                "type": "topojson",
-                                "feature": "countries"
-                            }
-                        },
-                        "key": "id"
-                    },
-                    "as": "geo"
-                },
-                { "filter": "datum.Year == Year_selection" }
-            ],
-            "mark": { "type": "geoshape", "stroke": "#fff", "strokeWidth": 0.5 },
-            "encoding": {
-                "shape": { "field": "geo", "type": "geojson" },
-                "color": {
-                    "field": "PPP",
-                    "type": "quantitative",
-                    "scale": {
-                        "type": "log",
-                        "domain": [4, 40000],
-                        "range": ["#1f77b4", "#FFFF00"]
-                    },
-                    "condition": {
-                        "test": "datum.PPP === 0",
-                        "value": "gray"
-                    },
-                    "legend": { "format": ".2s" }
-                },
-                "tooltip": [
-                    { "field": "Country", "type": "nominal", "title": "Country" },
-                    { "field": "PPP", "type": "quantitative", "title": "Purchasing Power Parity", "format": "," },
-                    { "field": "Year", "type": "quantitative", "title": "Year" }
-                ]
-            }
+        "mark": {
+          "type": "geoshape",
+          "fill": "#ddd",
+          "stroke": "white",
+          "strokeWidth": 1
+        },
+        "encoding": {
+          "tooltip": { "field": "properties.name", "type": "nominal", "title": "Country" }
         }
+      },
+      {
+        "data": {
+          "url": "https://raw.githubusercontent.com/edwa0003/FIT3179-week-10-homework/refs/heads/main/data/PPP_from_2013_to_2023_billion.csv"
+        },
+        "transform": [
+          {
+            "lookup": "id",
+            "from": {
+              "data": {
+                "url": "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json",
+                "format": {
+                  "type": "topojson",
+                  "feature": "countries"
+                }
+              },
+              "key": "id"
+            },
+            "as": "geo"
+          },
+          { "filter": "datum.Year == Year_selection" }
+        ],
+        "mark": { "type": "geoshape", "stroke": "#fff", "strokeWidth": 0.5 },
+        "encoding": {
+          "shape": { "field": "geo", "type": "geojson" },
+          "color": {
+            "field": "PPP",
+            "type": "quantitative",
+            "scale": {
+              "type": "log",
+              "domain": [4, 40000],
+              "range": ["#1f77b4", "#FFFF00"]
+            },
+            "condition": {
+              "test": "datum.PPP === 0",
+              "value": "gray"
+            },
+            "legend": { "format": ".2s" }
+          },
+          "tooltip": [
+            { "field": "Country", "type": "nominal", "title": "Country" },
+            { "field": "PPP", "type": "quantitative", "title": "Purchasing Power Parity", "format": "," },
+            { "field": "Year", "type": "quantitative", "title": "Year" }
+          ]
+        }
+      },
+      {
+        "data": {
+          "values": [
+            { "longitude": -60, "latitude": -50 }
+          ]
+        },
+        "mark": {
+          "type": "text",
+          "align": "left",
+          "dx": 10,
+          "dy": -10,
+          "fontSize": 8,
+          "fontWeight": "bold"
+        },
+        "encoding": {
+          "text": {
+            "value": "Libya, Bangladesh, India, Ethiopia, and Rwanda"
+          },
+          "longitude": { "field": "longitude" },
+          "latitude": { "field": "latitude" }
+        }
+      },
+      {
+        "data": {
+          "values": [
+            { "longitude": -60, "latitude": -53 }
+          ]
+        },
+        "mark": {
+          "type": "text",
+          "align": "left",
+          "dx": 10,
+          "dy": -10,
+          "fontSize": 8,
+          "fontWeight": "bold"
+        },
+        "encoding": {
+          "text": {
+            "value": "showed the highest economy growth from 2013 to 2023"
+          },
+          "longitude": { "field": "longitude" },
+          "latitude": { "field": "latitude" }
+        }
+      }
     ],
     "config": {}
-}
+  }
+  
