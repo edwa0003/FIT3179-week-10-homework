@@ -1,0 +1,108 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": "World Countries Corporate Tax Rates 2023",
+    "width": "container",
+    "height": 500,
+    "params": [
+        {
+            "name": "zoom_level",
+            "value": 300,
+            "bind": {
+                "input": "range",
+                "min": 100,
+                "max": 1000,
+                "step": 50,
+                "name": "Zoom: "
+            }
+        },
+        {
+            "name": "center_to",
+            "value": [0, 20],
+            "bind": {
+                "input": "select",
+                "options": [
+                    [0, 20],
+                    [-95, 37],
+                    [10, 51],
+                    [100, 15]
+                ],
+                "labels": ["Global", "North America", "Europe", "South East Asia"],
+                "name": "Map Centre: "
+            }
+        },
+        {
+            "name": "tax_rate_filter",
+            "value": 50,
+            "bind": {
+                "input": "range",
+                "min": 0,
+                "max": 50,
+                "step": 1,
+                "name": "Corporate Tax Rate Filter: "
+            }
+        }
+    ],
+    "projection": {
+        "type": "equirectangular",
+        "center": { "expr": "center_to" },
+        "scale": { "expr": "zoom_level" }
+    },
+    "layer": [
+        {
+            "data": {
+                "url": "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json",
+                "format": { "type": "topojson", "feature": "countries" }
+            },
+            "mark": {
+                "type": "geoshape",
+                "fill": "#ddd",
+                "stroke": "white",
+                "strokeWidth": 1
+            },
+            "encoding": {
+                "tooltip": { "field": "properties.name", "type": "nominal", "title": "Country" }
+            }
+        },
+        {
+            "data": {
+                "url": "https://raw.githubusercontent.com/edwa0003/FIT3179-week-10-homework/refs/heads/main/data/corporate_tax_rates_2023.csv"
+            },
+            "transform": [
+                {
+                    "lookup": "id",
+                    "from": {
+                        "data": {
+                            "url": "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json",
+                            "format": {
+                                "type": "topojson",
+                                "feature": "countries"
+                            }
+                        },
+                        "key": "id"
+                    },
+                    "as": "geo"
+                },
+                { "filter": "datum.tax_rate < tax_rate_filter" }
+            ],
+            "mark": { "type": "geoshape", "stroke": "#fff", "strokeWidth": 0.5 },
+            "encoding": {
+                "shape": { "field": "geo", "type": "geojson" },
+                "color": {
+                    "field": "tax_rate",
+                    "type": "quantitative",
+                    "scale": {
+                        "type": "linear",
+                        "domain": [0, 50],
+                        "range": ["#1f77b4", "#FFFF00"]
+                    },
+                    "legend": { "title": "Corporate Tax Rate (%)" }
+                },
+                "tooltip": [
+                    { "field": "Country", "type": "nominal", "title": "Country" },
+                    { "field": "tax_rate", "type": "quantitative", "title": "Corporate Tax Rate (%)", "format": ".1f" }
+                ]
+            }
+        }
+    ],
+    "config": {}
+}
