@@ -25,23 +25,10 @@
 
     <div class="page">
 
-        <h2>Example 1: Overview+Detail</h2>
-        <!-- pure grid group -->
-        <div class="pure-g">
-            <div class="pure-u-1-1">
-                <div id="vis1" class="vis-container"></div>
-            </div>
-        </div>
-        <!-- end pure grid group -->
-        <br>
-
-        <p>Example originally from:
-            <a href=https://vega.github.io/vega-lite/examples/interactive_overview_detail.html>link</a>
-
 
             <hr class="hr3">
 
-            <h2>Example 2: Interactive multiple views</h2>
+            <h2>Example 2: Countries by ease of doing business index</h2>
             <!-- pure grid group -->
             <div class="pure-g">
                 <div class="pure-u-1-1">
@@ -94,8 +81,7 @@
             });
         }
     
-        //setVisualizationWidth("1_overview_detail.vg.json", '#vis1', 1000);  // Apply to vis1
-        //setVisualizationWidth("2_interactive.vg.json", '#vis2', 1000);      // Apply to vis2
+        setVisualizationWidth("js/countries_by_business_index.vg.json", '#vis2', 1000);      // Apply to vis2
         setVisualizationWidth("js/countries_by_PPP_map.vg.json", '#vis3', 1000);      // Apply to vis3
         //setVisualizationWidth("4_small_multiples.vg.json", '#vis4', 1000);  // Apply to vis4
     </script>    
