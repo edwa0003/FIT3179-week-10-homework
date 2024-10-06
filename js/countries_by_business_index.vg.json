@@ -13,16 +13,16 @@
       ]
     },
     {
-      "filter": "datum.rank > sliderValue && datum.rank <= sliderValue + 20"
+      "filter": "datum.rank >= sliderValue && datum.rank < sliderValue + 20"
     }
   ],
   "params": [
     {
       "name": "sliderValue",
-      "value": 0,
+      "value": 1,
       "bind": {
         "input": "range",
-        "min": 0,
+        "min": 1,
         "max": 170,
         "step": 10,
         "name": "Countries: "
