@@ -5,11 +5,21 @@
   },
   "transform": [
     {
-      "sort": [{"field": "2019", "order": "ascending"}]
+      "calculate": "toNumber(datum['2019'])",
+      "as": "ease_of_doing_business_rank"
     },
     {
       "window": [
-        {"op": "row_number", "as": "rank"}
+        {
+          "op": "rank",
+          "as": "rank"
+        }
+      ],
+      "sort": [
+        {
+          "field": "ease_of_doing_business_rank",
+          "order": "ascending"
+        }
       ]
     },
     {
@@ -34,16 +44,19 @@
     "y": {
       "field": "Country",
       "type": "nominal",
-      "sort": {"field": "rank", "order": "ascending"}
+      "sort": {
+        "field": "rank",
+        "order": "ascending"
+      }
     },
     "x": {
-      "field": "2019",
+      "field": "ease_of_doing_business_rank",
       "type": "quantitative",
-      "title": "Ease of Doing Business Index (2019)"
+      "title": "Ease of Doing Business Rank (2019)"
     },
     "tooltip": [
       {"field": "Country", "type": "nominal"},
-      {"field": "2019", "type": "quantitative"}
+      {"field": "ease_of_doing_business_rank", "type": "quantitative"}
     ]
   },
   "config": {
